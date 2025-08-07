@@ -4,6 +4,7 @@ import { validateCardNumber, checkPayment } from "./validateCardNumber";
 export default class Validator {
   constructor(container) {
     this.container = container;
+   
     this.modalMessage = new MessageContainer(container);
     this.inputEl = document.querySelector(".input-card-number");
     this.cards = [...document.querySelectorAll(".card-img")];
