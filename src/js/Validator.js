@@ -1,17 +1,15 @@
-import MessageContainer from "./MessageContainer";
 import { validateCardNumber, checkPayment } from "./validateCardNumber";
 
 export default class Validator {
   constructor(container) {
     this.container = container;
-   
-    this.modalMessage = new MessageContainer(container);
+    this.Message = document.querySelector(".Message");
     this.inputEl = document.querySelector(".input-card-number");
     this.cards = [...document.querySelectorAll(".card-img")];
   }
 
   init() {
-    this.modalMessage.redrawModalMessage();
+   
 
     this.inputEl.addEventListener("input", this.onInput.bind(this));
 
@@ -23,25 +21,26 @@ export default class Validator {
   onSubmit(event) {
     event.preventDefault();
     this.cards.forEach((el) => el.classList.remove("card-img-filter"));
+    this.Message.style.display = "block";
 
     const isNumber = /^[0-9]+$/.test(parseInt(this.inputEl.value, 10));
     if (!isNumber) {
-      this.modalMessage.showMessage("Enter only number 0...9");
+      this.Message.textContent = "Enter only number 0...9";
       this.inputEl.value = "";
       return;
     }
 
     if (!this.inputEl.value || this.inputEl.value.length < 14) {
-      this.modalMessage.showMessage("Very short number...");
+      this.Message.textContent = "Very short number...";
       this.inputEl.value = "";
       return;
     }
 
     const isValid = validateCardNumber(this.inputEl.value);
     if (isValid) {
-      this.modalMessage.showMessage("is Valid");
+      this.Message.textContent = "is Valid";
     } else {
-      this.modalMessage.showMessage("is not Valid");
+      this.Message.textContent = "is not Valid";
     }
     this.inputEl.value = "";
   }
