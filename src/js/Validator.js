@@ -9,8 +9,6 @@ export default class Validator {
   }
 
   init() {
-   
-
     this.inputEl.addEventListener("input", this.onInput.bind(this));
 
     this.validateButton = this.container.querySelector(".validate-button");

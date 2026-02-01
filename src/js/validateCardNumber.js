@@ -2,11 +2,13 @@ import verify from "../json/verificationPayments.json";
 
 // Валидация структуры verify
 const isValidVerificationData = (data) => {
-  if (!data || typeof data !== 'object' || Array.isArray(data)) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
     return false;
   }
-  return Object.values(data).every(ids => 
-    Array.isArray(ids) && ids.every(id => typeof id === 'string' && id.length > 0)
+  return Object.values(data).every(
+    (ids) =>
+      Array.isArray(ids) &&
+      ids.every((id) => typeof id === "string" && id.length > 0)
   );
 };
 
@@ -17,7 +19,7 @@ if (!isValidVerificationData(verify)) {
 
 export function validateCardNumber(cardNumber) {
   // Базовая валидация формата
-  if (typeof cardNumber !== 'string' && typeof cardNumber !== 'number') {
+  if (typeof cardNumber !== "string" && typeof cardNumber !== "number") {
     return false;
   }
 
@@ -47,7 +49,7 @@ export function validateCardNumber(cardNumber) {
 
 export function checkPayment(cardNumber) {
   // Валидация ввода
-  if (typeof cardNumber !== 'string' && typeof cardNumber !== 'number') {
+  if (typeof cardNumber !== "string" && typeof cardNumber !== "number") {
     return false;
   }
 
@@ -68,4 +70,3 @@ export function checkPayment(cardNumber) {
 
   return false;
 }
-
